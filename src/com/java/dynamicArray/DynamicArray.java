@@ -62,8 +62,12 @@ public class DynamicArray  <E> {
     public void add(int index, E element) {
         rangeCheckForAdd(index);
         ensureCapacity(size + 1);
-        for (int i = size - 1; i >= index; i--) {
-            elements[i + 1] = elements[i];
+//        for (int i = size - 1; i >= index; i--) {
+//            elements[i + 1] = elements[i];
+//        }
+        // 相比上面减少运算
+        for (int i = size; i > index; i--) {
+            elements[i] = elements[i - 1];
         }
         // 系统级别的数组赋值
         // System.arraycopy(elements, index, elements, index + 1, size - index);
@@ -83,6 +87,11 @@ public class DynamicArray  <E> {
         return old;
     }
 
+    // 删除某个元素
+    public void remove(E element) {
+        remove(indexOf(element));
+    }
+
     // 查看元素的位置
     public int indexOf(E element) {
         if (element == null) {
@@ -91,7 +100,18 @@ public class DynamicArray  <E> {
             }
         } else {
             for (int i = 0; i < size; i++) {
-                // 自定义类需要重写类的equals
+                // 自定义类可以重写类的equals
+                /*
+                @Override
+                public boolean equals(Object obj) {
+                    if (obj == null) return false;
+                    if (obj instanceof Class) {
+                        Class cls = (Class) obj;
+                        return this.x = cls.x;
+                    }
+                    return false;
+                }
+                */
                 if (element.equals(elements[i])) return i;
             }
         }
