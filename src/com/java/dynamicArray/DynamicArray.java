@@ -65,6 +65,8 @@ public class DynamicArray  <E> {
         for (int i = size - 1; i >= index; i--) {
             elements[i + 1] = elements[i];
         }
+        // 系统级别的数组赋值
+        // System.arraycopy(elements, index, elements, index + 1, size - index);
         elements[index] = element;
         size++;
     }
