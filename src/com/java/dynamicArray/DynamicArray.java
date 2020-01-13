@@ -1,18 +1,16 @@
 package com.java.dynamicArray;
 
-import java.util.Objects;
+import com.java.common.MyAbstractList;
+import com.java.common.MyList;
 
 /**
  * @author: boris
  * @Date: 2020-01-09 23:28
  * @Description:
  */
-public class DynamicArray  <E> {
+public class DynamicArray<E> extends MyAbstractList<E> {
 
-    private int size;
     private E[] elements;
-    private static final int DEFAULT_CAPACITY = 10;
-    private static final int ELEMENT_NOT_FOUND = -1;
 
     public DynamicArray(int capacity) {
         capacity = capacity < DEFAULT_CAPACITY ? DEFAULT_CAPACITY :capacity;
@@ -21,27 +19,6 @@ public class DynamicArray  <E> {
 
     public DynamicArray() {
         this(DEFAULT_CAPACITY);
-    }
-
-    // 返回元素的数量
-    public int getSize() {
-        return size;
-    }
-
-    // 是否为空
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    // 是否包含某个元素
-    public boolean contains(E element) {
-        return indexOf(element) != ELEMENT_NOT_FOUND;
-    }
-
-    // 添加元素到最后面
-    public void add(E element) {
-        //elements[size++] = element;
-        add(size, element);
     }
 
     // 返回index位置对应的元素
@@ -124,22 +101,6 @@ public class DynamicArray  <E> {
             elements[i] = null;
         }
         size = 0;
-    }
-
-    private void outOfBounds(int index) {
-        throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
-    }
-
-    private void rangeCheck(int index) {
-        if(index < 0 || index >= size) {
-            outOfBounds(index);
-        }
-    }
-
-    private void rangeCheckForAdd(int index) {
-        if(index < 0 || index > size) {
-            outOfBounds(index);
-        }
     }
 
     private void ensureCapacity(int capacity) {
