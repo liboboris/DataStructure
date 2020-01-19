@@ -3,6 +3,8 @@ package com.java.dynamicArray;
 import com.java.common.MyAbstractList;
 import com.java.common.MyList;
 
+import java.util.Objects;
+
 /**
  * @author: boris
  * @Date: 2020-01-09 23:28
@@ -61,6 +63,7 @@ public class DynamicArray<E> extends MyAbstractList<E> {
         }
         // 将最后一个元素置空，数组长度同时减1
         elements[--size] = null;
+        trim();
         return old;
     }
 
@@ -103,6 +106,7 @@ public class DynamicArray<E> extends MyAbstractList<E> {
         size = 0;
     }
 
+    // 扩容
     private void ensureCapacity(int capacity) {
         int oldCapacity = elements.length;
         if (oldCapacity >= capacity) return;
@@ -114,6 +118,24 @@ public class DynamicArray<E> extends MyAbstractList<E> {
         }
         elements = newElements;
         System.out.println(oldCapacity + ", expands: " + newCapacity);
+    }
+
+    // 缩容
+    // 如果内存使用比较紧张，动态数组有比较多的剩余空间，可以考虑进行缩容操作
+    // 比如剩余空间占总容量的一半时，就进行缩容（自己定义）
+    // 如果扩容倍数、缩容时机设计不得当，有可能会导致复杂度震荡
+    private void trim() {
+        int capacity = elements.length;
+        // 假定缩容一半
+        int newCapacity = capacity >> 1;
+        // 剩余空间不足一半，本身的容量又比默认小（发生在缩容后）
+        if(size > newCapacity || capacity <= DEFAULT_CAPACITY) return;
+
+        E[] newElements = (E[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+        elements = newElements;
     }
 
     @Override
