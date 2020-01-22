@@ -104,6 +104,10 @@ public class DynamicArray<E> extends MyAbstractList<E> {
             elements[i] = null;
         }
         size = 0;
+        // 缩容
+        if(elements != null && elements.length > DEFAULT_CAPACITY) {
+            elements = (E[]) new Object[DEFAULT_CAPACITY];
+        }
     }
 
     // 扩容
