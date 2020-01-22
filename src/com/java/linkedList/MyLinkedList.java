@@ -5,7 +5,7 @@ import com.java.common.MyAbstractList;
 /**
  * @author: boris
  * @Date: 2020-01-11 21:45
- * @Description:
+ * @Description: 单向链表
  */
 public class MyLinkedList<E> extends MyAbstractList<E> {
     private Node<E> head;
