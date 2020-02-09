@@ -1,9 +1,6 @@
 package com.java.dynamicArray;
 
 import com.java.common.MyAbstractList;
-import com.java.common.MyList;
-
-import java.util.Objects;
 
 /**
  * @author: boris
