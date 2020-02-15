@@ -26,4 +26,7 @@ public class MyStack<E> {
     public E top() {
         return list.get(list.size() - 1);
     }
+    public void clear() {
+        list.clear();
+    }
 }
